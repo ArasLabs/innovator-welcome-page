@@ -1,0 +1,97 @@
+﻿<AML>
+ <Item type="Method" id="2A9C602B3CE14FD2BF13DC4749BC132A" action="add">
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[var thisWindow = aras.getMostTopWindowWithAras();
+var newToc = aras.MetadataCache.GetConfigurableUiAsync({
+    'location_name': 'TOC'
+}, true).then(function(resObj) {
+    for (i = 0; i < resObj.length; i++) {
+        if (resObj[i]["@type"] == "CommandBarMenu") {
+            document.getElementById("test").innerHTML += '<div id="' + i + '"><h3><u>' + resObj[i].label + '</u></h3></div>';
+            document.getElementById(i).innerHTML += '<ul id="list' + i + '" style="list-style-type:none"></ul>';
+            var list = document.getElementById("list" + i);
+            var objCount = 0;
+
+            for (x = 0; x < resObj[i].data.length; x++) {
+                if (resObj[i].data[x]["@type"] != "CommandBarMenu") {
+                    var newLi = document.createElement("li");
+                    newLi.id = "list" + i + "Obj" + x;
+                    //newLi.innerHTML = resObj[i].data[x].label;
+                    //This is to determine whether we are dealing with a standard itemType, or an itemType which utilizes a TOC View/startpage.
+                    //different method calls based on the startpage/search
+                    if (resObj[i].data[x].additional_data.hasOwnProperty("formId")) {
+                        //create launchForm method with parameters ID, SVG, and label
+                        //top.arasTabs.openForm(formId, svg, label)
+                        newLi.innerHTML = resObj[i].data[x].label;
+                        var image = document.createElement("img");
+                        image.src = resObj[i].data[x].image;
+                        image.setAttribute("class","icon");
+                        newLi.innerHTML = resObj[i].data[x].label;
+                        newLi.prepend(image);
+                        if (objCount > 4) {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openForm(\'" + resObj[i].data[x].additional_data.formId + "\',\'" + resObj[i].data[x].image + "\',\'" + resObj[i].data[x].label + "\')");
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("class","extra"+i);
+                            document.getElementById("list" + i + "Obj" + x).style.display="none";
+                        } else {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openForm(\'" + resObj[i].data[x].additional_data.formId + "\',\'" + resObj[i].data[x].image + "\',\'" + resObj[i].data[x].label + "\')");
+                        }
+
+                    } else if (resObj[i].data[x].additional_data.hasOwnProperty("startPage")) {
+                        //create openPage with URL/path, svg, label
+                        //top.arasTabs.openPage(path, svg, label)
+                        newLi.innerHTML = resObj[i].data[x].label;
+                        var image = document.createElement("img");
+                        image.src = resObj[i].data[x].image;
+                        image.setAttribute("class","icon")
+                        newLi.innerHTML = resObj[i].data[x].label;
+                        newLi.prepend(image);
+                        if (objCount > 4) {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openPage(\'" + resObj[i].data[x].additional_data.startPage + "\',\'" + resObj[i].data[x].image + "\',\'" + resObj[i].data[x].label + "\')");
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("class","extra"+i);
+                            document.getElementById("list" + i + "Obj" + x).style.display="none";
+                        } else {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openPage(\'" + resObj[i].data[x].additional_data.startPage + "\',\'" + resObj[i].data[x].image + "\',\'" + resObj[i].data[x].label + "\')");
+                        }
+
+                    } else {
+                        var image = document.createElement("img");
+                        image.src = resObj[i].data[x].image;
+                        image.setAttribute("class","icon");
+                        newLi.innerHTML = resObj[i].data[x].label;
+                        newLi.prepend(image);
+                        if(aras.getPermissions("can_add",resObj[i].data[x].additional_data.itemTypeId,null,resObj[i].data[x].label)){
+                            var newImage = document.createElement("img");
+                            newImage.src = "../images/new.svg";
+                            newImage.setAttribute("class","new");
+                            newImage.setAttribute("onclick","newItem('"+resObj[i].data[x].additional_data.itemTypeId+"')");
+                            newLi.appendChild(newImage);
+                        }
+
+                        if (objCount > 4) {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openSearch(\'" + resObj[i].data[x].additional_data.itemTypeId + "\')");
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("class","extra"+i);
+                            document.getElementById("list" + i + "Obj" + x).style.display="none";
+                        } else {
+                            list.appendChild(newLi);
+                            document.getElementById("list" + i + "Obj" + x).setAttribute("onclick", "openSearch(\'" + resObj[i].data[x].additional_data.itemTypeId + "\')");
+                        }
+
+                    }
+                    objCount++;
+                }
+            }
+            if (objCount > 5)
+                list.innerHTML += '<br><li id="expand'+i+'" onclick="showExtra(\'expand'+i+'\','+i+')" style="font-weight:bold;text-align:center;">More...</li>';
+        }
+    }
+});
+return;]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>welcomeOnLoad</name>
+ </Item>
+</AML>

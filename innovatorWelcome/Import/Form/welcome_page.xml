@@ -1,0 +1,147 @@
+﻿<AML>
+ <Item type="Form" id="F9EA05533773425DAE81DA5D36CC9046" action="add">
+  <category_form>0</category_form>
+  <height>234</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>699</width>
+  <name>welcome_page</name>
+  <Relationships>
+   <Item type="Body" id="A6977F6DC21543FB8FA180D6DDCCFFEF" action="add">
+    <bg_color>#FFFFFF</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="welcome_page" type="Form">F9EA05533773425DAE81DA5D36CC9046</source_id>
+    <Relationships>
+     <Item type="Field" id="5F0F90604ECE4CD09CD0ED6CE3403945" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<style type="text/css">
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #ffffff;
+        justify-content: left;
+    }
+
+    .flex-container>div {
+        background-color: #DEE7F8;
+        width: 200px;
+        margin: 20px;
+        line-height: 20px;
+        border-radius: 15px;
+        align-content: left;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: auto;
+        padding: 0;
+        position: relative;
+        display: inline;
+    }
+    h3 {
+        text-align: center;
+    }
+
+    li {
+        font-size: 9pt;
+        cursor: pointer;
+    }
+li:hover{
+  background-color: #c3ccde;
+}
+.icon{
+height: 20px;
+width: 20px;
+display: inline;
+padding: 5px;
+vertical-align: middle;
+}
+.new{
+height: 20px;
+width: 20px;
+padding: 5px;
+display: inline;
+vertical-align:
+middle;
+display: none;
+}
+li:hover .new{
+display: inline;
+}
+</style>
+<script type="text/javascript">
+    var aras = top.aras;
+    function openSearch(itemId) {
+        top.arasTabs.openSearch(itemId);
+        return;
+    }
+    function openForm(id, svg, label) {
+        top.arasTabs.openForm(id, svg, label);
+        return;
+    }
+    function openPage(path, svg, label) {
+        top.arasTabs.openPage(path, null, svg, label);
+        return;
+    }
+    function showExtra(elId, i) {
+        var extras = document.getElementsByClassName("extra" + i);
+        for (let item of extras) {
+            item.style.display = "block";
+        }
+        document.getElementById(elId).innerText = "Less...";
+        document.getElementById(elId).setAttribute("onclick","showLess('"+elId+"','"+i+"')");
+        return;
+    }
+    function showLess(elId,i) {
+        var extras = document.getElementsByClassName("extra" + i);
+        for (let item of extras) {
+            item.style.display = "none";
+        }
+        var el = document.getElementById(elId)
+        el.innerText = "More...";
+        el.setAttribute("onclick","showExtra('"+elId+"','"+i+"')");
+        return;
+    }
+    function newItem(itemTypeId) {
+        var iType = aras.IomInnovator.newItem("ItemType","get");
+        iType.setProperty("id",itemTypeId);
+        iType = iType.apply();
+        aras.uiNewItemEx(iType.getProperty("name",""));
+        window.event.stopPropagation();
+    }
+</script>
+<img src='../images/aras-innovator.svg' id="logo"
+    style="margin-top: 10px; height: 141px; width: 500px; margin-left: auto; margin-right: auto;" />
+
+<div id="test" class="flex-container" />]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="A6977F6DC21543FB8FA180D6DDCCFFEF" type="Body">A6977F6DC21543FB8FA180D6DDCCFFEF</source_id>
+      <tab_stop>1</tab_stop>
+      <x>5</x>
+      <y>11</y>
+      <name>Main</name>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="Form Event" id="81A223F24B3A478D9918676C9B907C5B" action="add">
+    <form_event>onload</form_event>
+    <related_id keyed_name="welcomeOnLoad" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>welcomeOnLoad</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="welcome_page" type="Form">F9EA05533773425DAE81DA5D36CC9046</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>
