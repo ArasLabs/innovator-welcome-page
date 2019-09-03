@@ -1,6 +1,6 @@
 # Innovator Welcome Page
 
-This community project adds a new form to greet the user when first logging into Innovator. It uses a method called aras.MetadataCache.GetConfigurableUiAsync to grab the cached TOC, and then restructures it into the Homepage. Administrators can set the welcome_page form as a "Start Page" for individual Users/Identities. 
+This community project adds a new form to greet the user when first logging into Innovator. It uses a method called `aras.MetadataCache.GetConfigurableUiAsync` to grab the cached TOC, and then restructures it into the Homepage. Administrators can set the welcome_page form as a "Start Page" for individual Users. 
 
 The startpage allows users to quickly launch searches for any ItemType they have access to. It also allows them to easily create a new Item, as long as they have the correct permissions to do so. 
 
@@ -9,7 +9,7 @@ The welcome page is also included in the TOC. The TOC Access of the welcome_page
 
 Release | Notes
 --------|--------
-[v1.0](https://github.com/ArasLabs/innovator-welcome-page/releases/tag/v1.0) | First Release of the Innovator Welcome Page project
+[v1.0](https://github.com/ArasLabs/innovator-welcome-page/releases/tag/v1.0) | First release of the Innovator Welcome Page project
 #### Supported Aras Versions
 
 Project | Aras
@@ -40,7 +40,7 @@ Project | Aras
 ## Usage
 
 1. As an Administrator, select the designated user
-2. Set the user's startPage property to "Welcome Page"
+2. Set the user's starting page property to "Welcome Page"
 3. Log in as a user with the updated Start Page.
 4. Click an item to launch a search, and click the new button to create a new version of that Item. 
 
